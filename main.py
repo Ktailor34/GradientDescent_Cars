@@ -93,18 +93,42 @@ print(m,c)
 #plt.plot([i for i in range (20000)], r2List)
 iterationDomain = [i for i in range (20000)]
 
-plt.scatter(displacement, mpg)
-plt.xlabel("displacement")
-plt.ylabel("mpg")
-plt.title("displacement vs mpg")
+# plt.scatter(displacement, mpg)
+# plt.xlabel("displacement")
+# plt.ylabel("mpg")
+# plt.title("displacement vs mpg")
 
-# axs[0, 1].scatter(horsepower, mpg)
-# axs[1, 0].scatter(weight, mpg)
-# axs[1, 1].scatter(acceleration, mpg)
-# axs[2, 0].scatter(cylinders, mpg)
-# axs[2, 1].scatter(year, mpg)
-# axs[3, 0].scatter(origin, mpg)
-# plt.savefig("displacement vs mpg")
+# plt.scatter(horsepower, mpg)
+# plt.xlabel("horsepower")
+# plt.ylabel("mpg")
+# plt.title("horsepower vs mpg")
+
+# plt.scatter(weight, mpg)
+# plt.xlabel("weight")
+# plt.ylabel("mpg")
+# plt.title("weight vs mpg")
+
+# plt.scatter(acceleration, mpg)
+# plt.xlabel("acceleration")
+# plt.ylabel("mpg")
+# plt.title("acceleration vs mpg")
+
+# plt.scatter(cylinders, mpg)
+# plt.xlabel("cylinders")
+# plt.ylabel("mpg")
+# plt.title("cylinders vs mpg")
+
+# plt.scatter(year, mpg)
+# plt.xlabel("year")
+# plt.ylabel("mpg")
+# plt.title("year vs mpg")
+
+# plt.scatter(origin, mpg)
+# plt.xlabel("origin")
+# plt.ylabel("mpg")
+# plt.title("origin vs mpg")
+
+#plt.savefig("displacement vs mpg")
 plt.show()
   
 
