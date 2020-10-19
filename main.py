@@ -38,7 +38,7 @@ origin = data['origin'].values #categorical
 n = float(len(displacement))
 
 # create an array of all features , i.e. X values , and transpose it
-Xs = np.array ([displacement, horsepower, weight, acceleration, cylinders, year, origin]).T
+Xs = np.array ([displacement, horsepower, weight, acceleration]).T
 
 # create an array for output variables
 Y = np.array(mpg)
@@ -47,7 +47,7 @@ Y = np.array(mpg)
 alpha = 0.0001
 
 c = 0
-m = np.zeros(7)
+m = np.zeros(4)
 
 errorList = []
 r2List = []
@@ -70,28 +70,41 @@ for i in range(20000):
   D_m2 = (-2/n) * np.sum(Xs.T[1] * (Y-Y_pred))  # Derivative wrt m
   D_m3 = (-2/n) * np.sum(Xs.T[2] * (Y-Y_pred))  # Derivative wrt m
   D_m4 = (-2/n) * np.sum(Xs.T[3] * (Y-Y_pred))  # Derivative wrt m
-  D_m5 = (-2/n) * np.sum(Xs.T[4] * (Y-Y_pred))  # Derivative wrt m
-  D_m6 = (-2/n) * np.sum(Xs.T[5] * (Y-Y_pred))  # Derivative wrt m
-  D_m7 = (-2/n) * np.sum(Xs.T[6] * (Y-Y_pred))  # Derivative wrt m
+  # D_m5 = (-2/n) * np.sum(Xs.T[4] * (Y-Y_pred))  # Derivative wrt m
+  # D_m6 = (-2/n) * np.sum(Xs.T[5] * (Y-Y_pred))  # Derivative wrt m
+  # D_m7 = (-2/n) * np.sum(Xs.T[6] * (Y-Y_pred))  # Derivative wrt m
   D_c = (-2/n) * np.sum(Y-Y_pred)  # Derivative wrt c
   m[0] = m[0] - (alpha * D_m1)  # Update m
   m[1] = m[1] - (alpha * D_m2)  # Update m
   m[2] = m[2] - (alpha * D_m3)  # Update m
   m[3] = m[3] - (alpha * D_m4)  # Update m
-  m[4] = m[4] - (alpha * D_m5)  # Update m
-  m[5] = m[5] - (alpha * D_m6)  # Update m
-  m[6] = m[6] - (alpha * D_m7)  # Update m
+  # m[4] = m[4] - (alpha * D_m5)  # Update m
+  # m[5] = m[5] - (alpha * D_m6)  # Update m
+  # m[6] = m[6] - (alpha * D_m7)  # Update m
   c = c - (alpha * D_c)  # Update c
   
   errorList.append(error)
   r2List.append(r2_score(Y,Y_pred))
+
+
+iterationDomain = [i for i in range (20000)]
+
+# plt.plot(iterationDomain, errorList)
+# plt.xlabel("iterations")
+# plt.ylabel("cost")
+# plt.title("iterations vs cost")
+
+plt.plot(iterationDomain, r2List)
+plt.xlabel("iterations")
+plt.ylabel("r^2 values")
+plt.title("iterations vs r^2")
 
 print("r2",r2_score(Y,Y_pred))
 print(m,c)
 
 #plt.plot([i for i in range (20000)], errorList)
 #plt.plot([i for i in range (20000)], r2List)
-iterationDomain = [i for i in range (20000)]
+
 
 # plt.scatter(displacement, mpg)
 # plt.xlabel("displacement")
