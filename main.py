@@ -44,18 +44,20 @@ Xs = np.array ([displacement, horsepower, weight, acceleration, cylinders, year,
 Y = np.array(mpg)
 
 # establish a learning rate
-alpha = 0.01
+alpha = 0.0001
 
 c = 0
 m = np.zeros(7)
 
+errorList = []
+r2List = []
 # Find m and c for the non-normalized data using least squares regression
 
 scaler = StandardScaler().fit(Xs)
 Xs = scaler.transform(Xs)
 print()
 currenterror = 999999999999999999999999999999
-for i in range(10000):
+for i in range(20000):
   Y_pred = np.dot(m,Xs.T) + c  # The current predicted value of Y
 
   error = (1/n) * np.sum(np.square(Y_pred - Y))
@@ -81,9 +83,28 @@ for i in range(10000):
   m[6] = m[6] - (alpha * D_m7)  # Update m
   c = c - (alpha * D_c)  # Update c
   
-  print("error for each", error)
+  errorList.append(error)
+  r2List.append(r2_score(Y,Y_pred))
 
 print("r2",r2_score(Y,Y_pred))
 print(m,c)
+
+#plt.plot([i for i in range (20000)], errorList)
+#plt.plot([i for i in range (20000)], r2List)
+iterationDomain = [i for i in range (20000)]
+
+plt.scatter(displacement, mpg)
+plt.xlabel("displacement")
+plt.ylabel("mpg")
+plt.title("displacement vs mpg")
+
+# axs[0, 1].scatter(horsepower, mpg)
+# axs[1, 0].scatter(weight, mpg)
+# axs[1, 1].scatter(acceleration, mpg)
+# axs[2, 0].scatter(cylinders, mpg)
+# axs[2, 1].scatter(year, mpg)
+# axs[3, 0].scatter(origin, mpg)
+# plt.savefig("displacement vs mpg")
+plt.show()
   
 
