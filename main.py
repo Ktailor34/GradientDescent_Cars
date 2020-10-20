@@ -16,9 +16,9 @@ def r2_score(Y, Y_pred):
   r2 = 1 - (ss_res / ss_tot)
   return r2
 
-def plotgraph(currentx, mpg):
-  currenty = mpg
-  fig, ax = plt.scatter(currentx,currenty)
+# def plotgraph(currentx, mpg):
+#   currenty = mpg
+#   fig, ax = plt.scatter(currentx,currenty)
 
 # given file
 data = pd.read_csv('auto-mpg.csv')
@@ -44,7 +44,7 @@ Xs = np.array ([displacement, horsepower, weight, acceleration]).T
 Y = np.array(mpg)
 
 # establish a learning rate
-alpha = 0.0001
+alpha = 0.0000001
 
 c = 0
 m = np.zeros(4)
@@ -53,11 +53,11 @@ errorList = []
 r2List = []
 # Find m and c for the non-normalized data using least squares regression
 
-scaler = StandardScaler().fit(Xs)
-Xs = scaler.transform(Xs)
+# scaler = StandardScaler().fit(Xs)
+# Xs = scaler.transform(Xs)
 print()
 currenterror = 999999999999999999999999999999
-for i in range(20000):
+for i in range(500000):
   Y_pred = np.dot(m,Xs.T) + c  # The current predicted value of Y
 
   error = (1/n) * np.sum(np.square(Y_pred - Y))
@@ -85,26 +85,32 @@ for i in range(20000):
   
   errorList.append(error)
   r2List.append(r2_score(Y,Y_pred))
+  print(error)
 
 
-iterationDomain = [i for i in range (20000)]
-
-# plt.plot(iterationDomain, errorList)
-# plt.xlabel("iterations")
-# plt.ylabel("cost")
-# plt.title("iterations vs cost")
-
-plt.plot(iterationDomain, r2List)
-plt.xlabel("iterations")
-plt.ylabel("r^2 values")
-plt.title("iterations vs r^2")
-
+print ("error:", error)
 print("r2",r2_score(Y,Y_pred))
 print(m,c)
 
+
+#### Find all plotting below
+
+# iterationDomain = [i for i in range (500000)]
+
+#plt.plot(iterationDomain, errorList)
+# plt.xlabel("iterations")
+# plt.ylabel("cost")
+# plt.title("iterations vs cost")
+# plt.savefig("un-normalized iterations vs cost")
+
+# plt.plot(iterationDomain, r2List)
+# plt.xlabel("iterations")
+# plt.ylabel("r^2 values") 
+# plt.title("iterations vs r^2")
+# plt.savefig("un-normalized iterations vs r^2")
+
 #plt.plot([i for i in range (20000)], errorList)
 #plt.plot([i for i in range (20000)], r2List)
-
 
 # plt.scatter(displacement, mpg)
 # plt.xlabel("displacement")
@@ -142,6 +148,6 @@ print(m,c)
 # plt.title("origin vs mpg")
 
 #plt.savefig("displacement vs mpg")
-plt.show()
+# plt.show()
   
 
